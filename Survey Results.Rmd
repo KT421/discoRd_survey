@@ -1,0 +1,20 @@
+---
+title: "DiscoRd Survey"
+output: html_notebook
+---
+
+# DiscoRd Survey Results
+
+```{r}
+library(googlesheets4)
+library(tidyverse)
+
+gs4_deauth()
+survey_results <- read_sheet("14qV7qpPso4o8PBIOZVbSH8sD_tx8fkJh_fgHgRNqvQM")
+```
+
+```{r}
+ggplot(survey_results,aes(x=`What is your gender?`,fill=`What is your gender?`)) +
+  geom_bar()
+```
+
