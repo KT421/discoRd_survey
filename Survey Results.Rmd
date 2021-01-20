@@ -10,11 +10,61 @@ library(googlesheets4)
 library(tidyverse)
 
 gs4_deauth()
-survey_results <- read_sheet("14qV7qpPso4o8PBIOZVbSH8sD_tx8fkJh_fgHgRNqvQM")
+survey_results <-
+  read_sheet("14qV7qpPso4o8PBIOZVbSH8sD_tx8fkJh_fgHgRNqvQM")
+
+survey_results_cleaned <- survey_results %>%
+  rename(
+    "gender" = "What is your gender?",
+    "age" = "What is your age?",
+    "country" = "Country of residence?",
+    "degree" = "Highest academic degree?",
+    "discipline" = "Field of study?",
+    "industry" = "What industry do you work in?",
+    "discovery_path" = "How did you hear about discoRd?",
+    "fav_channel" = "How did you hear about discoRd?",
+    "discord_platform" = "What platform do you use to browse discord the most?",
+    "discord_channel" = "What is your favorite discoRd channel?",
+    "rate_to_friend" = "On a scale of 1 to 10, how likely would you recommend discoRd server to a friend?",
+    "OS" = "What operating system do you use?",
+    "RAM" = "How much RAM do you have on the computer where R is installed (in GB)?",
+    "version_control" = "What version control software do you use?",
+    "IDE" = "What's your favorite Integrated Development Environment (IDE)/text editor to program in R",
+    "self_assess_skill" = "How would you self-assess your skill level in R?",
+    "years_programming" = "How long have you been programming in general? (in years)",
+    "years_programming_r" = "How long have you been programming in R? (in years)",
+    "other_languages" = "What other programming languages besides R do you use?",
+    "how_learned_r" = "How did you learn R? (pick the most used method)",
+    "reason_learned_r" =  "What is the reason you learned R? (pick one)",
+    "like_about_r" = "What did you like the most about R?",
+    "enjoy_r" = "On a scale of 1 to 10, how much do you enjoy using R?",
+    "recommend_r" = "On a scale of 1 to 10, how likely would you recommend R to someone new to programming?",
+    "resources" = "What resources have you used before for help or reference?",
+    "fav_wrangling_pkg" = "Favorite R data wrangling/data cleaning package? (at most 3)",
+    "fav_viz_pkg" = "Favorite R data visualization packages? (at most 3)",
+    "fav_dash_pkg" = "Favorite R reporting/dashboarding packages? (at most 3)",
+    "fav_dataset" = "Favorite built-in dataset in R? (at most 3)"
+  ) %>%
+  select(-c(`What is two times two? (Write the word for the answer. E.g. \"six\" is the answer for two times three)`,`Future survey question 1`,`Future survey question 2`,`Future survey question 3`,`Future survey question 4`,`Future survey question 5`))
 ```
 
 ```{r}
-ggplot(survey_results,aes(x=`What is your gender?`,fill=`What is your gender?`)) +
+ggplot(survey_results_cleaned,aes(x=gender,fill=gender)) +
   geom_bar()
+```
+
+```{r}
+ggplot(survey_results_cleaned,aes(x=age)) +
+  geom_histogram()
+```
+
+```{r}
+ ggplot(survey_results_cleaned,aes(x=degree,fill=gender)) +
+  geom_bar() +
+  coord_flip()
+```
+```{r}
+ ggplot(survey_results_cleaned,aes(x=version_control,fill=IDE)) +
+  geom_bar() 
 ```
 
